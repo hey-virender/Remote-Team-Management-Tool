@@ -22,7 +22,7 @@ dbConnection();
 
 app.use(
   cors({
-    origin: "https://remoteteammanagement.netlify.app",
+    origin: "https://remote-team-management-tool.vercel.app",
     methods: ["GET", "DELETE", "POST", "PUT", "PATCH"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
