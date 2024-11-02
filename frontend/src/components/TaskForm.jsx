@@ -80,9 +80,9 @@ function TaskForm() {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-rows-4 grid-cols-3 gap-x-3 gap-y-0"
+        className="grid gap-x-3 gap-y-0 xs:grid-cols-2  md:grid-rows-4 md:grid-cols-3 "
       >
-        <label className="row-span-1 col-span-1" htmlFor="title">
+        <label className="row-span-1 col-span-1 xs:col-span-3 xs:text-sm" htmlFor="title">
           Task Title
           <input
             id="title"
@@ -94,17 +94,17 @@ function TaskForm() {
             required
           />
         </label>
-        <label htmlFor="description" className="row-span-3 col-span-2">
+        <label htmlFor="description" className="md:row-span-3 md:col-span-2 xs:row-span-1 xs:col-span-3 xs:text-sm">
           Task Description
           <textarea
             name="description"
             id="description"
             value={description}
-            className=" w-full lg:h-52 resize-none bg-transparent border-2 outline-none rounded-md"
+            className=" w-full xs:h-20 h-52 resize-none bg-transparent border-2 outline-none rounded-md"
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </label>
-        <label htmlFor="dueDate" className="col-span-1 row-span-1">
+        <label htmlFor="dueDate" className="col-span-1 row-span-1 xs:text-sm">
           <span>Due Date</span>
           <input
             id="dueDate"
@@ -115,7 +115,7 @@ function TaskForm() {
             className="bg-transparent w-full uppercase"
           />
         </label>
-        <label htmlFor="priority" className="block ">
+        <label htmlFor="priority" className="col-span-1 row-span-1 xs:text-sm">
           Priority
           <select
             id="priority"
@@ -143,13 +143,13 @@ function TaskForm() {
             ))}
           </select>
         </label>
-        <div className="flex lg:h-12 justify-around">
-          <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        <div className="flex lg:h-12 justify-around xs:col-span-2 xs:text-sm xs:mt-3">
+          <button type="submit" className="bg-blue-500 text-white p-2 rounded xs:p-1">
             {task ? "Update Task" : "Create Task"}
           </button>
           <button
             type="button"
-            className="bg-gray-500 text-white p-2 rounded ml-2"
+            className="bg-gray-500 text-white p-2 rounded ml-2 xs:p-1"
             onClick={() => {
               setShowCreateTask(false);
             }}

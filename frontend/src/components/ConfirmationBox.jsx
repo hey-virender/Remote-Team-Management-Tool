@@ -14,23 +14,27 @@ const ConfirmationBox = ({ confirmationText, setConfirmationStatus }) => {
 
   return (
     <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-85 text-white">
-      <div className="bg-slate-800 lg:w-96 lg:h-24 lg:p-2 lg:rounded-lg">
+      <div className="bg-slate-800 w-96 h-32 p-5 rounded-lg">
         <div>{confirmationText}</div>
-        <div className="mt-4 flex lg:justify-end lg:gap-16">
+        <div className="mt-4 flex justify-end gap-16">
           <button
-            className="bg-green-500 lg:w-16 lg:rounded-md"
+            className="bg-green-500 w-16 rounded-md"
             onClick={() => setConfirmationStatus(true)} // Resolve as true when Yes is clicked
           >
             Yes
           </button>
           <button
-            className="bg-red-500 lg:w-16 lg:rounded-md"
+            className="bg-red-500 w-16 rounded-md"
             onClick={() => {
               setTimer(0);
               setConfirmationStatus(false);
             }} // Resolve as false when No is clicked
           >
-            No {timer}
+            No
+            <span className="text-sm pl-3">
+              
+            {timer}
+              </span> 
           </button>
         </div>
       </div>

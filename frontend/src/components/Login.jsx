@@ -19,42 +19,42 @@ const Login = () => {
   };
 
   return (
-    <div className="lg:pt-8">
-      <h2 className="text-center text-white font-semibold lg:text-2xl ">
+    <div className="xs:h-full md:h-screen md:pt-4">
+      <h2 className="text-center text-white font-semibold xs:text-lg md:text-2xl ">
         Log In with your Credentials
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center gap-6 bg-gray-800 mx-auto rounded-xl lg:h-72  lg:mt-4 lg:w-2/4 lg:p-12"
+        className="flex flex-col items-center gap-6 bg-gray-800 mx-auto rounded-xl xs:h-full xs:pt-16 md:w-2/4 md:h-96 md:mt-4 md:p-12"
       >
-        <label className="border-2 border-gray-700 lg:w-80 lg:px-4 py-2 rounded-xl">
+        <label className="border-2 border-gray-700 text-white  w-80 px-4 py-2 rounded-xl">
           Email:
           <input
-            className="outline-none bg-transparent  lg:pl-2"
+            className="outline-none bg-transparent text-white  pl-2"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        <label className="border-2 border-gray-700 lg:w-80 lg:px-4 py-2 rounded-xl relative">
+        <label className="border-2 border-gray-700  text-white w-80 px-4 py-2 rounded-xl relative">
           Password:
           <input
-            className="outline-none bg-transparent  lg:pl-2"
+            className="outline-none bg-transparent  text-white pl-2"
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
           <div
-            className="absolute right-3 lg:top-3"
+            className="absolute right-3 top-3"
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? <FaRegEye /> : <TbEyeClosed />}
           </div>
         </label>
         <button
-          className="bg-green-500 rounded-xl  font-semibold lg:w-24 lg:py-1"
+          className="bg-green-500 rounded-xl  font-semibold w-24 py-1"
           type="submit"
         >
           Login

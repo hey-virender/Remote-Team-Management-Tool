@@ -27,10 +27,10 @@ function Dashboard() {
           >
             <FaBell className="text-purple-600 lg:h-6 lg:w-6 " />
             {newNotification && (
-              <div className="absolute bg-red-500 lg:-top-1 lg:-right-2 lg:h-3 lg:w-3 rounded-full"></div>
+              <div className="absolute bg-red-500 -top-1 -right-2 h-3 w-3 rounded-full"></div>
             )}
           </button>
-          <div className="lg:h-10 lg:w-10 rounded-full bg-green-400"></div>
+          <div className="md:h-10 md:w-10 rounded-full bg-green-400"></div>
           <h1 className="capitalize font-semibold text-white">{user.name}</h1>
           <button
             className="capitalize font-medium bg-red-500 p-1 rounded-xl text-white"

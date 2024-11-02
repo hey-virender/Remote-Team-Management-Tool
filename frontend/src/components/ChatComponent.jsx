@@ -56,7 +56,7 @@ function ChatComponent() {
   console.log(messages);
 
   return (
-    <div className="p-4 bg-slate-900 rounded shadow lg:h-1/2">
+    <div className="p-2 bg-slate-900 rounded shadow w-2/3  lg:h-1/2">
       <h2 className="text-lg font-bold mb-2">Chat</h2>
       <div className="p-2 mb-2 h-64 overflow-y-scroll scrollbar-hidden">
         {messages.map((msg, index) => (
@@ -74,17 +74,17 @@ function ChatComponent() {
           </div>
         ))}
       </div>
-      <div className="flex">
+      <div className="flex w-full">
         <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="border p-2 flex-1 bg-transparent"
+          className="border p-2 flex-1 bg-transparent sm:w-1/3"
           placeholder="Type your message..."
         />
         <button
           onClick={handleSend}
-          className="bg-blue-500 text-white p-2 ml-2 rounded"
+          className="bg-blue-500 text-white p-2 ml-1 rounded"
         >
           Send
         </button>

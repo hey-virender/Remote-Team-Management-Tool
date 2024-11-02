@@ -8,7 +8,8 @@ const AuthComponent = () => {
       {showLogin ? <Login /> : <Register />}
 
       <div
-        className="absolute bg-slate-900 border-[0.06vw] border-black mx-auto rounded-full lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 lg:w-52 lg:h-12 lg:mt-3 lg:mb-3"
+        className="absolute bg-slate-900 border-[0.06vw] border-black mx-auto rounded-full
+        xs:bottom-28 xs:left-1/2 lg:bottom-10  -translate-x-1/2 w-52 h-12 mt-3 pb-3"
         onClick={() => {
           setShowLogin(!showLogin);
         }}

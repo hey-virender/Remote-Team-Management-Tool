@@ -32,11 +32,11 @@ function TaskList() {
       {showCreateTask ? (
         <TaskForm />
       ) : (
-        <div className="scrollbar-hidden overflow-y-scroll lg:max-h-[80vh] lg:pb-10">
+        <div className="scrollbar-hidden overflow-y-scroll max-h-[80vh] pb-10">
           <div
             className={` ${
               tasks.length > 0
-                ? "grid lg:grid-cols-3 lg:gap-y-5 lg:gap-x-4 lg:mt-4 "
+                ? " xs:flex xs:flex-col xs:gap-4 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:gap-y-5 lg:gap-x-4 lg:mt-4 "
                 : "flex justify-center items-center lg:pt-24"
             }`}
           >

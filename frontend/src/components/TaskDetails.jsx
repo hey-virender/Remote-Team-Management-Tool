@@ -5,6 +5,7 @@ import { useTaskContext } from "../context/ContextProviders";
 import TaskForm from "./TaskForm";
 import { CgCloseO } from "react-icons/cg";
 import ConfirmationBox from "./ConfirmationBox";
+import { MdChat } from "react-icons/md";
 const TaskDetails = () => {
   const {
     currentTask,
@@ -18,18 +19,44 @@ const TaskDetails = () => {
 
   const [confirmationStatus, setConfirmationStatus] = useState(false);
   const [showConfirmationBox, setShowConfirmationBox] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState(null);
+  const [showChat, setShowChat] = useState(false);
 
-  const handleDelete = (id) => {
-    deleteTask(id)
-      .then(() => {
-        setTasks(tasks.filter((currentTask) => currentTask._id !== id));
-        setShowTaskDetails(false);
-      })
-      .catch((error) => console.error("Error deleting currentTask:", error));
-  };
+  
+const handleDeleteTask = async (id) => {
+  setShowConfirmationBox(true);
+  setConfirmationMessage("Are you sure you want to delete this task?");
 
+  // Wait for the user's decision (Yes or No)
+  const confirmed = await new Promise((resolve) => {
+    const handleConfirmationStatus = (status) => {
+      resolve(status); // Resolve with the user's choice (true or false)
+      setConfirmationStatus(null); // Reset the confirmation status
+      setShowConfirmationBox(false); // Hide the confirmation box
+      setConfirmationMessage(null); // Reset the confirmation message
+    };
+
+    // Temporary function to pass to the confirmation box
+    setConfirmationStatus(() => handleConfirmationStatus);
+  });
+
+  // If the user confirmed (clicked Yes), delete the task
+  if (confirmed) {
+    try {
+      await deleteTask(id);
+      setConfirmationMessage(null);
+      setShowTaskDetails(false)
+      // Handle any additional logic after deleting the task
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  }
+};
   const handleMarkAsCompleted = async (id) => {
     setShowConfirmationBox(true);
+    setConfirmationMessage(
+      "Are you sure you want to mark this task as completed?"
+    );
 
     // Wait for the user's decision (Yes or No)
     const confirmed = await new Promise((resolve) => {
@@ -37,6 +64,7 @@ const TaskDetails = () => {
         resolve(status); // Resolve with the user's choice (true or false)
         setConfirmationStatus(null); // Reset the confirmation status
         setShowConfirmationBox(false); // Hide the confirmation box
+        setConfirmationMessage(null); // Reset the confirmation message
       };
 
       // Temporary function to pass to the confirmation box
@@ -47,6 +75,8 @@ const TaskDetails = () => {
     if (confirmed) {
       try {
         await markTaskCompleted(id);
+        setConfirmationMessage(null);
+        setShowTaskDetails(false)
         // Handle any additional logic after marking the task as completed
       } catch (error) {
         console.error("Error marking task as completed:", error);
@@ -67,25 +97,29 @@ const TaskDetails = () => {
   return showCreateTask ? (
     <TaskForm />
   ) : (
-    <div className=" flex lg:gap-3 ">
-      <div className="relative bg-gray-900 rounded-lg w-full text-white">
-        <div
-          className="absolute lg:right-5 lg:top-3  "
-          onClick={() => setShowTaskDetails(false)}
-        >
-          <CgCloseO className="lg:h-7 lg:w-7" />
+    <div className=" flex xs:flex-col sm:flex-row lg:gap-3 overflow-x-hidden">
+      <div className="relative bg-gray-900 rounded-lg w-full text-white xs:pb-5">
+        <div className="absolute right-5 top-3 xs:right-2 xs:flex xs:flex-col xs:gap-4">
+          <CgCloseO
+            className="h-7 w-7"
+            onClick={() => setShowTaskDetails(false)}
+          />
+          <MdChat
+            className="h-7 w-7 xs:block xs:z-50 sm:hidden "
+            onClick={() => setShowChat(!showChat)}
+          />
         </div>
-        <div className="lg:p-2 rounded-md">
-          <div className="flex gap-24">
-            <h2 className="lg:text-xl">{currentTask.title}</h2>
+        <div className="p-2 xs:pr-10 rounded-md">
+          <div>
+            <h2 className="xs:text-sm ">{currentTask.title}</h2>
           </div>
 
-          <div className="flex gap-2 lg:border-[0.01vw] lg:p-2 lg:rounded-xl lg:mt-4">
-            <div className=" lg:h-44 lg:w-3/5 lg:p-2 lg:text-xs rounded-xl">
+          <div className="flex gap-2  xs:flex-col lg:border-[0.01vw] lg:p-2 lg:rounded-xl mt-4">
+            <div className=" border-[1px] h-44 md:w-3/5 xs:h-28 p-2 text-sm rounded-xl">
               <p>{currentTask.description}</p>
             </div>
             <div className="bg-white lg:w-[0.2vw] "></div>
-            <div className="flex flex-col gap-2 lg:text-sm lg:ml-3">
+            <div className="flex flex-col  gap-2 text-sm ml-3 xs:grid xs:grid-cols-2">
               <p>Due: {formatDate(currentTask.dueDate)}</p>
               <p>
                 Priority :{" "}
@@ -127,19 +161,19 @@ const TaskDetails = () => {
           </div>
         </div>
         {currentTask.status == "Pending" && (
-          <div className="absolute lg:bottom-2 lg:left-2">
+          <div className="xs:flex xs:justify-around xs:mt-4 lg:absolute lg:bottom-2 lg:left-2">
             <button
               onClick={() => {
                 setShowCreateTask(true);
                 setSelectedTask(currentTask);
               }}
-              className="bg-blue-500 text-white px-5 lg:w-24 lg:h-8 rounded mr-4"
+              className="bg-blue-500 text-white px-5 w-24 h-8 rounded mr-4"
             >
               Edit
             </button>
             <button
-              onClick={() => handleDelete(currentTask._id)}
-              className="bg-red-500 text-white px-5 lg:w-24 lg:h-8 rounded"
+              onClick={() => handleDeleteTask(currentTask._id)}
+              className="bg-red-500 text-white px-5 w-24 h-8 rounded"
             >
               Delete
             </button>
@@ -147,12 +181,18 @@ const TaskDetails = () => {
         )}
         {showConfirmationBox && (
           <ConfirmationBox
-            confirmationText="Do you want to mark this task as completed ?"
+            confirmationText={confirmationMessage}
             setConfirmationStatus={confirmationStatus}
           />
         )}
       </div>
-      <ChatComponent />
+      <div
+        className={`xs:absolute xs:w-full xs:h-full xs:bg-black xs:bg-opacity-90 xs:transition-all xs:ease-linear xs:duration-300 sm:static sm:bg-transparent sm:translate-x-1/4 ${
+          !showChat ? "xs:-translate-x-full" : "xs:translate-x-0"
+        } `}
+      >
+        <ChatComponent />
+      </div>
     </div>
   );
 };
