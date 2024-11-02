@@ -22,7 +22,7 @@ dbConnection();
 
 app.use(
   cors({
-    origin: "*",
+    origin: "https://remoteteammanagement.netlify.app",
     methods: ["GET", "DELETE", "POST", "PUT", "PATCH"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],

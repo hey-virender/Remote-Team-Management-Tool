@@ -5,7 +5,7 @@ import Message from "../models/Message.js"; // Ensure the path is correct
 export const initializeSocket = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: "*", // Adjust as needed
+      origin: "https://remoteteammanagement.netlify.app", // Adjust as needed
     },
   });
 
