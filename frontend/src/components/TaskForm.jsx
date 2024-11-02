@@ -82,7 +82,7 @@ function TaskForm() {
         onSubmit={handleSubmit}
         className="grid gap-x-3 gap-y-0 xs:grid-cols-2  md:grid-rows-4 md:grid-cols-3 "
       >
-        <label className="row-span-1 col-span-1 xs:col-span-3 xs:text-sm" htmlFor="title">
+        <label className="lg:row-span-1 lg:col-span-1 xs:col-span-3 xs:text-sm" htmlFor="title">
           Task Title
           <input
             id="title"
@@ -100,7 +100,7 @@ function TaskForm() {
             name="description"
             id="description"
             value={description}
-            className=" w-full xs:h-20 h-52 resize-none bg-transparent border-2 outline-none rounded-md"
+            className=" w-full xs:h-20 lg:h-48 resize-none bg-transparent border-2 outline-none rounded-md"
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </label>
@@ -143,7 +143,7 @@ function TaskForm() {
             ))}
           </select>
         </label>
-        <div className="flex lg:h-12 justify-around xs:col-span-2 xs:text-sm xs:mt-3">
+        <div className="flex lg:h-8 justify-around xs:col-span-2 xs:text-sm xs:mt-3 lg:col-span-1">
           <button type="submit" className="bg-blue-500 text-white p-2 rounded xs:p-1">
             {task ? "Update Task" : "Create Task"}
           </button>
