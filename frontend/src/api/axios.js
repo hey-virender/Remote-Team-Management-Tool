@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api", // This should match your proxy configuration
+  baseURL: "https://remote-team-management-tool-production.up.railway.app/api", // This should match your proxy configuration
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
