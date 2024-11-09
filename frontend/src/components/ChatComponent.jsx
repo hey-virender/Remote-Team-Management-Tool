@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { useTaskContext, useAuth } from "../context/ContextProviders";
 
-const socket = io("http://localhost:3000"); // Ensure this URL matches your backend server
+const socket = io("https://remote-team-management-tool-production.up.railway.app"); // Ensure this URL matches your backend server
 
 function ChatComponent() {
   const { currentTask } = useTaskContext();

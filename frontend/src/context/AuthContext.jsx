@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../api/axios";
 import PropTypes from "prop-types";
 
 export const AuthContext = createContext();
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
         userData
       );
       localStorage.setItem("token", response.data.token);
-      const { data } = await axios.get("http://localhost:3000/api/profile", {
+      const { data } = await axios.get("/profile", {
         headers: { Authorization: `Bearer ${response.data.token}` },
       });
       setUser(data);
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       confirmPassword,
     };
     try {
-      await axios.post("http://localhost:3000/api/register", data);
+      await axios.post("/api/register", data);
       await login(email, password);
     } catch (error) {
       console.error("Registration failed:", error);
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         try {
           const { data } = await axios.get(
-            "http://localhost:3000/api/profile",
+            "/profile",
             {
               headers: { Authorization: `Bearer ${token}` },
             }

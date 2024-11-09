@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3000");
+const socket = io("https://remote-team-management-tool-production.up.railway.app");
 export const NotificationsContext = createContext();
 
 export const NotificationsProvider = ({ children }) => {
