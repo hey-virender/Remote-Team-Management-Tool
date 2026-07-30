@@ -216,7 +216,10 @@ Create `.env`:
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 PORT=3000
+CLIENT_ORIGIN=http://localhost:5173
 ```
+
+See `backend/.env.example` for the full list.
 
 ```bash
 node server.js
@@ -232,7 +235,7 @@ npm run dev
 
 Runs on **http://localhost:5173**.
 
-> **Note:** the CORS origin and the Socket.io origin are currently hardcoded to the deployed Vercel URL in `backend/server.js` and `backend/configs/socket.js`. Change both to `http://localhost:5173` for local development.
+> Both the REST CORS origin and the Socket.io origin read from `CLIENT_ORIGIN`, defaulting to `http://localhost:5173`. Set it to your deployed frontend URL in production.
 
 ---
 
@@ -254,7 +257,6 @@ Four independent concerns — auth, tasks, notifications, errors — with little
 
 ## 🚧 Known Limitations
 
-- **CORS and socket origins are hardcoded** and should move to environment variables.
 - **No automated tests.**
 - **Uploaded files are stored on the server filesystem**, which doesn't survive redeploys on ephemeral hosting — object storage is the fix.
 - **No pagination** on list endpoints.
@@ -263,7 +265,6 @@ Four independent concerns — auth, tasks, notifications, errors — with little
 
 ### Roadmap
 
-- [ ] Move origins and config to environment variables
 - [ ] Object storage for uploads
 - [ ] Mark-as-read and notification preferences
 - [ ] Apply role checks with the existing admin middleware

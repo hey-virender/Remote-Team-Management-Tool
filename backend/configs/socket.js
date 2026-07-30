@@ -2,10 +2,14 @@ import { Server } from "socket.io";
 import Conversation from "../models/Conversation.js"; // Ensure the path is correct
 import Message from "../models/Message.js"; // Ensure the path is correct
 
+// Allowed browser origin for websocket connections. Set CLIENT_ORIGIN to the
+// deployed frontend URL in production, or http://localhost:5173 locally.
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:5173";
+
 export const initializeSocket = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: "https://remote-team-management-tool.vercel.app", // Adjust as needed
+      origin: CLIENT_ORIGIN,
     },
   });
 

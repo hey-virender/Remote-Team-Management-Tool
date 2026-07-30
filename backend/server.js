@@ -13,6 +13,10 @@ import notificationRoutes from "./routes/notificationRoutes.js";
 import { errorHandler } from "./middlewares/errorMiddleware.js";
 import { initializeSocket } from "./configs/socket.js";
 import dbConnection from "./configs/dbConnect.js";
+// Allowed browser origin. Must match the deployed frontend URL in production.
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:5173";
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 const server = http.createServer(app);
@@ -22,7 +26,7 @@ dbConnection();
 
 app.use(
   cors({
-    origin: "https://remote-team-management-tool.vercel.app",
+    origin: CLIENT_ORIGIN,
     methods: ["GET", "DELETE", "POST", "PUT", "PATCH"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -49,6 +53,6 @@ app.get("/api", (req, res) => {
   res.json({ message: "API is running" });
 });
 
-server.listen(process.env.PORT || 3000, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
