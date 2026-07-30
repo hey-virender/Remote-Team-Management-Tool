@@ -2,7 +2,7 @@
 
 A collaboration platform for distributed teams — projects, tasks, time tracking, file sharing, notifications, and real-time per-task chat over WebSockets.
 
-**🔗 Live Demo:** [remote-team-management-tool.vercel.app](https://remote-team-management-tool.vercel.app)
+> **Note:** the hosted demo is offline while the project is redeployed. Setup instructions are below.
 
 ---
 
